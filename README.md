@@ -1,5 +1,5 @@
 
-# 🧠 amaymani-otc-bland
+# 🧠 otc-bland
 
 ## NOTE:
 I have already added the required keys. But please be sure to use your Bland API key, since I have exhausted my credits.
