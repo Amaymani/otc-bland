@@ -1,7 +1,7 @@
 
 # 🧠 amaymani-otc-bland
 
-##NOTE:
+## NOTE:
 I have already added the required keys. But please be sure to use your Bland API key, since I have exhausted my credits.
 Bland ai only provides 2USD of credits, 100 calls/day is just the rate limit. 
 Without credits, it works well, but sometimes latency increases unexpectedly.
