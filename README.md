@@ -3,14 +3,17 @@
 ````markdown
 # 🧠 amaymani-otc-bland
 
-A full-stack TypeScript web application built with **Next.js**, integrating with **Bland API Agents** to create, authenticate, and retrieve conversational agents. It features a clean UI, modular components, and MongoDB for persistent data storage.
+##NOTE:
+I have already added the required keys. But please be sure to use your Bland API key, since I have exhausted my credits.
+Bland ai only provides 2USD of credits, 100 calls/day is just the rate limit. 
+Without credits, it works well, but sometimes latency increases unexpectedly.
 
 ---
 
 ## 🚀 Features
 
-- ✅ Create and manage Bland API Agents
-- 🔐 Secure Authentication (NextAuth)
+- ✅ Create your OTC order using AI.
+- 🔐 Secure Authentication (NextAuth) 
 - 📡 API integration for agent communication
 - 🎨 Fully responsive, modern UI using Tailwind CSS
 - 🧱 Modular component architecture
@@ -34,13 +37,18 @@ amaymani-otc-bland/
 ├── components/                 # Reusable UI components
 │   ├── magicui/                # Fancy Dock UI effect
 │   └── ui/                     # Common UI primitives (Button, Card, Input, etc.)
+|   ├── Call.tsx                # Initiates the AI conversation
+│   ├── Dock.tsx                # Dock Component
+│   ├── Hero.tsx                # Hero Component
+│   ├── Modetoggle.tsx
+│   ├── Navbar.tsx
+│   ├── OrderDetail.tsx         # fetches the REAL-TIME price from exchange platforms (Uses APIs of individual choices)
 │
 ├── config/
 │   └── mongo-db.js             # MongoDB connection config
 │
 ├── lib/
 │   ├── AuthProvider.tsx        # Session auth wrapper
-│   ├── prompt.tsx              # Utility to handle AI prompt interactions
 │   └── models/
 │       └── BlandUsers.js       # User model schema
 │
@@ -64,6 +72,7 @@ amaymani-otc-bland/
 * **Backend**: Next.js API Routes, Bland API
 * **Auth**: NextAuth.js
 * **Database**: MongoDB (via Mongoose)
+* **AI**: Bland AI
 * **Language**: TypeScript
 
 ---
@@ -88,12 +97,14 @@ npm install
 Create a `.env.local` file:
 
 ```env
-NEXTAUTH_SECRET=your_secret
-NEXTAUTH_URL=http://localhost:3000
-
-MONGODB_URI=your_mongo_connection_string
-
-BLAND_API_KEY=your_bland_api_key
+NEXT_PUBLIC_BLAND_API_KEY=org_2d48cf3e9c17e1c3fdaef3b6f292285a12451c023dbeb8e28bf6e12f9ec764984ab98c49255b0dedccec69
+BLAND_API_KEY=org_2d48cf3e9c17e1c3fdaef3b6f292285a12451c023dbeb8e28bf6e12f9ec764984ab98c49255b0dedccec69
+MONGODB_URI=mongodb+srv://amaytripathi19:oL98lk7hXYuZRaDU@globetrotter.lbla3.mongodb.net/?retryWrites=true&w=majority&appName=globetrotter
+GOOGLE_CLIENT_ID=410872658026-m67n7k3foru2175sja6oihngafd3fva7.apps.googleusercontent.com
+GOOGLE_CLIENT_SECRET=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
+NEXTAUTH_SECRET=amayhaimeranaam
+NEXTAUTH_URL=http://localhost:3000/
+NEXT_PUBLIC_AGENT_ID=c02b9884-4694-49fc-a56c-34d091d81c65
 ```
 
 ### 4. Run the development server
@@ -106,24 +117,6 @@ The app will be available at [http://localhost:3000](http://localhost:3000)
 
 ---
 
-## 📸 Screenshots
-
-<!-- Include UI screenshots if available -->
-
-<p align="center">
-  <img src="https://placehold.co/600x300?text=Landing+Page" alt="Landing Page" />
-  <img src="https://placehold.co/600x300?text=Agent+Dashboard" alt="Agent Dashboard" />
-</p>
-
----
-
-## 🤝 Contributing
-
-Pull requests and contributions are welcome!
-Please open an issue first to discuss any breaking changes or new features.
-
----
-
 ## 📄 License
 
 This project is licensed under the **MIT License**.
@@ -133,15 +126,10 @@ This project is licensed under the **MIT License**.
 ## 👤 Author
 
 **Amay Mani**
-🔗 [GitHub](https://github.com/Amaymani) | 💼 [LinkedIn](https://linkedin.com/in/your-link) | ✉️ [Email](mailto:your@email.com)
+🔗 [GitHub](https://github.com/Amaymani) | 💼 [LinkedIn](https://www.linkedin.com/in/amaymanitripathi/) | ✉️ [Email](mailto:amaytripathi19@gmail.com)
 
 ---
 
 > Built with ❤️ to explore the power of AI Agents.
 
-```
-
----
-
-Let me know if you'd like a version with actual screenshots, badges (like Vercel deploy status, GitHub stars, etc.), or a separate `CONTRIBUTING.md` file.
 ```
