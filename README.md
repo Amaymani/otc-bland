@@ -6,6 +6,10 @@ I have already added the required keys. But please be sure to use your Bland API
 Bland ai only provides 2USD of credits, 100 calls/day is just the rate limit. 
 Without credits, it works well, but sometimes latency increases unexpectedly.
 
+App demo: [Link](https://drive.google.com/file/d/1pZctiZXSQhryfjBvCkOOU_eMQe_e7W-t/view?usp=sharing)
+Code demo: [Link](https://drive.google.com/file/d/1VL-aOLtlJAKOMX195zJaoHCCJaX0sWGl/view?usp=sharing)
+
+
 ---
 
 ## 🚀 Features
