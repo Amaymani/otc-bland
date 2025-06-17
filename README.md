@@ -80,7 +80,7 @@ amaymani-otc-bland/
 ### 1. Clone the repo
 
 ```bash
-git clone https://github.com/your-username/amaymani-otc-bland.git
+git clone https://github.com/Amaymani/otc-bland
 cd amaymani-otc-bland
 ```
 
