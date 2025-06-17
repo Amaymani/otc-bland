@@ -1,6 +1,4 @@
 
-
-````markdown
 # 🧠 amaymani-otc-bland
 
 ##NOTE:
