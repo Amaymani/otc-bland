@@ -49,7 +49,7 @@ return the {symbol} in standard short form only, for example, BTCUSDT if user ha
           quantity: "Number",
         },
         keywords: ["OKX:3", " Bybit:3", "Deribit:3", "Binance:3"],
-        webhook: "https://webhook.site/955e6246-3f53-4003-afc1-b90422b7f113",
+        webhook: "https://otc-bland.vercel.app/api/get-agent-data",
       },
       {
         headers: {
