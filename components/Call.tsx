@@ -75,7 +75,7 @@ const Call = () => {
         }
       );
       setSessionToken(res.data.token);
-      await getLatestCall(res.data.sid);
+      
     } catch (err) {
       console.error(err);
     }
@@ -107,38 +107,12 @@ const Call = () => {
         console.error("Failed to end conversation:", error);
       }
       setIsLoading(true);
-      // Wait for 5 seconds
-      await new Promise((resolve) => setTimeout(resolve, 10000));
+    
+      await new Promise((resolve) => setTimeout(resolve, 7000));
 
       try {
-        const res = await axios.get("https://api.bland.ai/v1/calls", {
-          headers: {
-            authorization: process.env.NEXT_PUBLIC_BLAND_API_KEY,
-          },
-        });
-
-        console.log(res.data.calls[0].c_id);
-        setCallID(res.data.calls[0].c_id);
-        // const targetTime = new Date(res.data.calls[0].variables.timestamp);
-        // const now = new Date();
-        // const diffInMs = now.getTime() - targetTime.getTime();
-        // const diffInMinutes = diffInMs / 1000 / 60;
-
-        // if (diffInMinutes < 4) {
-        //   setIsLoading(false);
-        //   return;
-        // }
-        const callId = res.data.calls[0].c_id;
-        const detailRes = await axios.get(
-          `https://api.bland.ai/v1/calls/${callId}`,
-          {
-            headers: {
-              authorization: process.env.NEXT_PUBLIC_BLAND_API_KEY,
-            },
-          }
-        );
-
-        setCallDetails(detailRes.data.analysis);
+        const latestCall = await getLatestCall(sessionToken);
+        setCallDetails(latestCall);
       } catch (e) {
         console.log(e);
       }
