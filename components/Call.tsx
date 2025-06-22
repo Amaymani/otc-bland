@@ -7,6 +7,8 @@ import { Mic } from "lucide-react";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
 import { useSession } from "next-auth/react";
+import { set } from "mongoose";
+import { get } from "http";
 
 const Call = () => {
   const [isCalling, setIsCalling] = useState(false);
@@ -40,6 +42,21 @@ const Call = () => {
   if (!agentId) {
     throw new Error("AGENT_ID environment variable is not defined");
   }
+
+  const getLatestCall = async (sid: String) => {
+    try {
+      const response = await axios.get(
+        `https://otc-bland.vercel.app/api/latest-call?sid=${sid}`,
+        
+      );
+      setCallDetails(response.data);
+      return response.data;
+
+    } catch (error) {
+      console.error("Error fetching latest call:", error);
+      throw error;
+    }
+  };
   const startConversation = async () => {
 
     if (status=="unauthenticated"){
@@ -58,6 +75,7 @@ const Call = () => {
         }
       );
       setSessionToken(res.data.token);
+      await getLatestCall(res.data.sid);
     } catch (err) {
       console.error(err);
     }
