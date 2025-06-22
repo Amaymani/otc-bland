@@ -14,7 +14,7 @@ function verifyWebhookSignature(key: string, data: string, signature: string): b
 export async function POST(req: NextRequest) {
   try {
     // Get the raw body as text for signature verification
-    const rawBody = await req.text();
+    const rawBody = JSON.stringify(req.body)
     
     // Get the signature from headers
     const signature = req.headers.get('x-webhook-signature');
