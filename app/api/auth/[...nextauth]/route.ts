@@ -1,13 +1,12 @@
 // app/api/auth/[...nextauth]/route.ts
 
-import NextAuth, { NextAuthOptions } from "next-auth";
+import NextAuth from "next-auth";
 import GoogleProvider from "next-auth/providers/google";
-import { AdapterUser } from "next-auth/adapters";
-import { JWT } from "next-auth/jwt";
+import { NextAuthOptions } from "next-auth";
 import connectDB from "@/config/mongo-db";
 import User from "@/lib/models/BlandUsers";
 
-// Extend the Session type to include id and username
+// Extend the Session type
 declare module "next-auth" {
   interface Session {
     user?: {
@@ -20,7 +19,7 @@ declare module "next-auth" {
   }
 }
 
-export const authOptions: NextAuthOptions = {
+const authOptions: NextAuthOptions = {
   providers: [
     GoogleProvider({
       clientId: process.env.GOOGLE_CLIENT_ID!,
@@ -29,7 +28,6 @@ export const authOptions: NextAuthOptions = {
   ],
   secret: process.env.NEXTAUTH_SECRET,
   callbacks: {
-    // Handle sign-in logic (create user if doesn't exist)
     async signIn({ profile }) {
       if (!profile?.email) return false;
       await connectDB();
@@ -45,8 +43,6 @@ export const authOptions: NextAuthOptions = {
 
       return true;
     },
-
-    // Attach user data to session
     async session({ session, token }) {
       await connectDB();
 
