@@ -7,8 +7,6 @@ import { Mic } from "lucide-react";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
 import { useSession } from "next-auth/react";
-import { set } from "mongoose";
-import { get } from "http";
 
 const Call = () => {
   const [isCalling, setIsCalling] = useState(false);
@@ -46,22 +44,19 @@ const Call = () => {
   const getLatestCall = async (sid: String) => {
     try {
       const response = await axios.get(
-        `https://otc-bland.vercel.app/api/latest-call?sid=${sid}`,
-        
+        `https://otc-bland.vercel.app/api/latest-call?sid=${sid}`
       );
       setCallDetails(response.data);
       return response.data;
-
     } catch (error) {
       console.error("Error fetching latest call:", error);
       throw error;
     }
   };
   const startConversation = async () => {
-
-    if (status=="unauthenticated"){
+    if (status == "unauthenticated") {
       alert("Please Sign In to use the feature");
-      return
+      return;
     }
     setIsCalling((prev) => !prev);
     try {
@@ -75,7 +70,6 @@ const Call = () => {
         }
       );
       setSessionToken(res.data.token);
-      
     } catch (err) {
       console.error(err);
     }
@@ -107,18 +101,19 @@ const Call = () => {
         console.error("Failed to end conversation:", error);
       }
       setIsLoading(true);
-    
-      await new Promise((resolve) => setTimeout(resolve, 7000));
 
-      try {
-        const latestCall = await getLatestCall(sessionToken);
-        setCallDetails(latestCall);
-      } catch (e) {
-        console.log(e);
-      }
+      await new Promise(() =>
+        setTimeout(async () => {
+          try {
+            const latestCall = await getLatestCall(sessionToken);
+            setCallDetails(latestCall);
+          } catch (e) {
+            console.log(e);
+          }
+        }, 7000)
+      );
       setIsLoading(false);
     }
-
   };
 
   return (
@@ -127,9 +122,7 @@ const Call = () => {
         <Button
           className="bg-red-500 text-white rounded-full h-20 w-20"
           onClick={() => {
-            
             endConversation();
-            
           }}
         >
           {" "}
@@ -143,9 +136,7 @@ const Call = () => {
             isCalling && "bg-red-600"
           }`}
           onClick={() => {
-            
             startConversation();
-            
           }}
         >
           <Mic
@@ -160,7 +151,9 @@ const Call = () => {
             AI is Active, Click to End Call
           </span>
         ) : (
-          <span className="dark:text-gray-500 text-zinc-800">Click to Speak and trade </span>
+          <span className="dark:text-gray-500 text-zinc-800">
+            Click to Speak and trade{" "}
+          </span>
         )}
       </div>
 
