@@ -7,6 +7,7 @@ import { Mic } from "lucide-react";
 import axios from "axios";
 import OrderDetail from "./OrderDetail";
 import { useSession } from "next-auth/react";
+import styles from "./Call.module.css";
 
 const Call = () => {
   const [isCalling, setIsCalling] = useState(false);
@@ -106,7 +107,7 @@ const Call = () => {
         setTimeout(async () => {
           try {
             console.log(sessionToken); //check this out later
-            
+
             const latestCall = await getLatestCall(sessionToken);
             setCallDetails(latestCall);
           } catch (e) {
@@ -160,7 +161,15 @@ const Call = () => {
       </div>
 
       {isLoading ? (
-        <div>Loading...</div>
+        <div className={styles.pyramidLoader}>
+          <div className={styles.wrapper}>
+            <span className={`${styles.side} ${styles.side1}`}></span>
+            <span className={`${styles.side} ${styles.side2}`}></span>
+            <span className={`${styles.side} ${styles.side3}`}></span>
+            <span className={`${styles.side} ${styles.side4}`}></span>
+            <span className={styles.shadow}></span>
+          </div>
+        </div>
       ) : (
         callDetails?.symbol &&
         callDetails?.exchange_platform &&
@@ -172,6 +181,7 @@ const Call = () => {
           />
         )
       )}
+
     </div>
   );
 };
