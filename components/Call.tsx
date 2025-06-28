@@ -105,12 +105,14 @@ const Call = () => {
       await new Promise(() =>
         setTimeout(async () => {
           try {
+            console.log(sessionToken); //check this out later
+            
             const latestCall = await getLatestCall(sessionToken);
             setCallDetails(latestCall);
           } catch (e) {
             console.log(e);
           }
-        }, 7000)
+        }, 10000)
       );
       setIsLoading(false);
     }
