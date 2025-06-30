@@ -33,9 +33,6 @@ const Call = () => {
     return;
   }
 
-  // Replace with your actual agent ID
-  // Replace with your session token
-
   const agentId = process.env.NEXT_PUBLIC_AGENT_ID;
 
   if (!agentId) {
@@ -45,7 +42,7 @@ const Call = () => {
   const getLatestCall = async (sid: String) => {
     try {
       const response = await axios.get(
-        `https://otc-bland.vercel.app/api/latest-call?sid=${sid}`
+        `https://otc-bland.vercel.app/api/latest-call`
       );
       setCallDetails(response.data);
       return response.data;
@@ -63,7 +60,7 @@ const Call = () => {
     try {
       const res = await axios.post(
         `https://api.bland.ai/v1/agents/${agentId}/authorize`,
-        {}, // No body in the original fetch, so pass an empty object
+        {},
         {
           headers: {
             authorization: process.env.NEXT_PUBLIC_BLAND_API_KEY,
@@ -76,13 +73,20 @@ const Call = () => {
     }
     try {
       const client = new BlandWebClient(agentId, sessionToken);
+
       const uniqueCallId = crypto.randomUUID();
 
-      await client.initConversation({
+      const res = await client.initConversation({
         sampleRate: 44100,
-        callId: uniqueCallId,
+        callId: sessionToken,
       });
 
+      const resClient =client.on("callConnected", (data) => {
+        console.log("Call ID:", data);
+      });
+
+      console.log("Client Responsehg:", res);
+      console.log("Client Response:", resClient);
       setBlandClient(client);
       setIsConnected(true);
       console.log("Conversation started successfully!");
@@ -94,7 +98,7 @@ const Call = () => {
     setIsCalling((prev) => !prev);
     if (blandClient) {
       try {
-        await blandClient.stopConversation();
+        blandClient.stopConversation();
         setIsConnected(false);
         setBlandClient(null);
         console.log("Conversation ended");
@@ -106,7 +110,7 @@ const Call = () => {
       await new Promise(() =>
         setTimeout(async () => {
           try {
-            console.log(sessionToken); //check this out later
+            console.log(sessionToken);
 
             const latestCall = await getLatestCall(sessionToken);
             setCallDetails(latestCall);
@@ -181,7 +185,6 @@ const Call = () => {
           />
         )
       )}
-
     </div>
   );
 };
