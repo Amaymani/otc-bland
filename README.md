@@ -99,15 +99,15 @@ npm install
 Create a `.env.local` file:
 
 ```env
-NEXT_PUBLIC_BLAND_API_KEY=org_2d48cf3e9c17e1c3fdaef3b6f292285a12451c023dbeb8e28bf6e12f9ec764984ab98c49255b0dedccec69
-BLAND_API_KEY=org_2d48cf3e9c17e1c3fdaef3b6f292285a12451c023dbeb8e28bf6e12f9ec764984ab98c49255b0dedccec69
-MONGODB_URI=mongodb+srv://amaytripathi19:oL98lk7hXYuZRaDU@globetrotter.lbla3.mongodb.net/?retryWrites=true&w=majority&appName=globetrotter
-GOOGLE_CLIENT_ID=410872658026-m67n7k3foru2175sja6oihngafd3fva7.apps.googleusercontent.com
-GOOGLE_CLIENT_SECRET=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
+NEXT_PUBLIC_BLAND_API_KEY=
+BLAND_API_KEY=
+MONGODB_URI=
+GOOGLE_CLIENT_ID=
+GOOGLE_CLIENT_SECRET=
 NEXTAUTH_SECRET=amayhaimeranaam
 NEXTAUTH_URL=http://localhost:3000/
-NEXT_PUBLIC_AGENT_ID=c02b9884-4694-49fc-a56c-34d091d81c65
-WEBHOOK_SECRET=459c40372845c13f32dec2e6be4062fb5160eda5bd0cbf08a91431aecd958bc0
+NEXT_PUBLIC_AGENT_ID=
+WEBHOOK_SECRET=
 ```
 
 ### 4. Run the development server
